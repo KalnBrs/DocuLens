@@ -1,33 +1,43 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { askGemini } from './functions/askGemini'
+import Dashboard from './dashboard'
+import data from '../test'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [file, setFile] = useState(null)
+  const [text, setText] = useState('')
+  const [analysis, setAnalysis] = useState(data)
+  
+  const handleFileChange = async (event) => {
+    const uploadedFile = event.target.files[0];
+    if (uploadedFile) {
+      const reader = new FileReader();
+      setFile(uploadedFile)
+      reader.onload = async (e) => {
+        const contents = e.target.result;
+        setText(contents)
+        setAnalysis(await askGemini(contents))
+      };
+      reader.readAsText(uploadedFile);
+    }
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    {analysis ? <Dashboard analysis={analysis} /> : <div className="p-4">
+      <input type="file" className='file_upload' onChange={handleFileChange} />
+      {file && (
+        <div className="mt-2">
+          <p>File name: {file.name}</p>
+          <p>File size: {(file.size / 1024).toFixed(2)} KB</p>
+          {analysis ? (
+            <p>{JSON.stringify(analysis)}</p>
+          ) : 'Loading..'}
+        </div>
+      )}
+    </div>}
+      
     </>
   )
 }
