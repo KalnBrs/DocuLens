@@ -24,7 +24,7 @@ function App() {
   };
 
   return (
-    <>
+    <div className='relative'>
     {analysis ? <Dashboard analysis={analysis} /> : <div className="p-4">
       <input type="file" className='file_upload' onChange={handleFileChange} />
       {file && (
@@ -38,7 +38,7 @@ function App() {
       )}
     </div>}
       
-    </>
+    </div>
   )
 }
 
