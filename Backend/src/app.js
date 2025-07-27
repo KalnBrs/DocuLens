@@ -3,7 +3,11 @@ import express from 'express';
 const app = express();
 
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+  origin: 'http://localhost:5173', // frontend URL
+  methods: ['GET', 'POST'],
+  credentials: true, // if using cookies/sessions
+}))
 
 import geminiRoute from './Routes/gemini.js'
 app.use('/gemini', geminiRoute)
