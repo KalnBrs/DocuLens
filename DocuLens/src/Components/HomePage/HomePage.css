@@ -1,0 +1,25 @@
+.welcome-bg {
+  background-color: #1B263B;
+  width: 100%;
+  border-color: #778DA9;
+}
+
+.file_upload {
+  border: #0D1B2A solid 4px;
+  background-color: #ACB7C3;
+  color: #0D1B2A;
+  font-weight: bold;
+  text-align: center;
+}
+
+.loading {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}

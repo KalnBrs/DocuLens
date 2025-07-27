@@ -12,6 +12,7 @@ function Dashboard({ analysis, sessionId }) {
     <>
     <ChatWindow sessionId={sessionId} />
     <div className='flex'>
+      <button></button>
       <div className='relative flex flex-col w-10000'>
         <div className='m-5'>
           <SummaryPanel 
