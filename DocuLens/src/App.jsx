@@ -3,7 +3,6 @@ import './App.css'
 import { askGemini } from './functions/askGemini'
 import Dashboard from './dashboard'
 import { v4 as uuidv4 } from 'uuid';
-import data from '../test'
 import HomePage from './Components/HomePage/HomePage';
 
 function App() {
